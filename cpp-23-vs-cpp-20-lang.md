@@ -9,7 +9,6 @@ Sure! Here's a list of C++ language changes (not standard library additions) tha
 consteval int square(int x) {
     return x * x;
 }
-```
 
 template <typename T>
 consteval int compileTimeBehavior(T val) {
@@ -19,27 +18,35 @@ consteval int compileTimeBehavior(T val) {
         return -1;
     }
 }
+```
 ❌ Not valid in C++20 — consteval if was added in C++23 to improve clarity and intent in compile-time branching.
 
 🧩 2. explicit for Function Parameters (especially copy constructors)
 ✅ C++23 allows explicit on copy/move constructors with default arguments
+```cpp
 struct S {
     explicit(false) S(const S& other = S{}) {}  // ✅ C++23: control implicitness with `explicit(bool)`
 };
+```
 ❌ C++20 only allows explicit or not — no boolean condition.
 
 🧩 3. auto(x) for Function Parameters — Deduction for Copy Initialization
 ✅ C++23 allows auto(x) to deduce the type by copy-initialization, not template deduction rules.
+```cpp
 void f(auto(x)) {  // ✅ C++23: deduces like `auto x = expr`
     // ...
 }
+```
 Equivalent to:
+```cpp
 template <typename T>
 void f(T x);  // but with copy deduction semantics
+```
 ❌ C++20 does not support auto(x) parameter declarations at all.
 
 🧩 4. static operator() — Static Call Operator
 ✅ C++23 permits operator() to be declared static
+```cpp
 struct Callable {
     static void operator()() {
         // callable without an object
@@ -49,31 +56,33 @@ struct Callable {
 int main() {
     Callable::operator()();  // ✅ No instance needed
 }
+```
 ❌ In C++20, operator() must be a non-static member function.
 
 🧩 5. multidimensional [] Operator Overloading
 ✅ C++23 allows overloading operator[] with multiple arguments
+```cpp
 struct Matrix {
     int operator[](int row, int col) const {  // ✅ C++23 only
         return row * 10 + col;
     }
 };
+```
 ❌ C++20 allows only one argument for operator[].
 
 🧩 6. decltype(auto) in Function Parameters (as Abbreviated Template)
 ✅ C++23 permits this syntax:
+```cpp
 void foo(decltype(auto) x) {  // ✅ C++23
     // x deduced like: template<typename T> void foo(T x)
 }
+```
 ❌ C++20 disallows decltype(auto) as a parameter type outside of function return types or auto&&.
 
 🧩 7. sizeof and alignof in Constant Expressions with Incomplete Types
 ✅ C++23 improves constant evaluation for incomplete types
+```cpp
 template <typename T>
 constexpr size_t alignment = alignof(T);  // ✅ C++23: works in more contexts even if T is incomplete
+```
 ❌ C++20 restricts usage of sizeof, alignof in some constexpr contexts with incomplete types.
-
-
-
-
-
