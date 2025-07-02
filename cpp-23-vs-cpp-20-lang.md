@@ -5,9 +5,11 @@ Sure! Here's a list of C++ language changes (not standard library additions) tha
 
 🧩 1. consteval if — Compile-Time Branching
 ✅ C++23 allows if constexpr to be replaced by consteval if
+<pre> ```cpp
 consteval int square(int x) {
     return x * x;
 }
+``` </pre>
 
 template <typename T>
 consteval int compileTimeBehavior(T val) {
