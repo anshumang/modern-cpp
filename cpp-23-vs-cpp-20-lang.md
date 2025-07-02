@@ -1,6 +1,6 @@
 Sure! Here's a list of C++ language changes (not standard library additions) that are introduced in C++23 — not available in C++20 — along with examples to illustrate each.
 
-🔒 Not included: std:: library additions (e.g. std::expected, std::print, std::flat_map, etc.)
+🔒 Not included: `std::` library additions (e.g. `std::expected`, `std::print`, `std::flat_map`, etc.)
 ✅ Included: Core language features (syntax and semantics)
 
 🧩 1. `consteval if` — Compile-Time Branching
